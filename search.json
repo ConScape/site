@@ -39,7 +39,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "ConScape goes live\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nBram van Moorter\n\n\n\n\n\n\n  \n\n\n\n\nWelcome to the ConScape Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nBram van Moorter\n\n\n\n\n\n\nNo matching items"
+    "text": "ConScape goes live\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nBram van Moorter\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "faq/2022_where_are_the_test_data/index.html",
@@ -88,7 +88,7 @@
     "href": "index.html",
     "title": "Welcome",
     "section": "",
-    "text": "Welcome\nConScape (i.e. “connected landscapes”) is a software library implemented in the high-performance open-source Julia language to compute landscape ecological metrics — originally developed in metapopulation ecology (such as ‘metapopulation capacity’ and ‘probability of connectivity’) — for large landscapes. Moreover,in addition to traditional distance metrics used in ecology (i.e. Euclidean and least-cost distance), ConScape implements the randomized shortest paths framework to represent connectivity along the continuum from optimal to random movements.\nBuilt by a team of ecologists, network scientists and software developers, ConScape is able to efficiently compute landscape metrics for high-resolution landscape representations to leverage the availability of large data for sustainable land use and biodiversity conservation. As a Julia implementation, ConScape combines computational efficiency with a transparent code base, which facilitates continued innovation through contributions from the rapidly growing community of landscape and connectivity modellers using Julia.\n\n\nConScape’s origin story\nConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in Circuitscape). The name ConScape itself refers not only to ‘Connected Landscapes’, but also to Conefor + Circuitscape as a testimony to this legacy.\nConScape has a similar focus as Conefor in that it aims at assessing the landscape network as a whole, i.e. it connects all landscape units (e.g. pixels) to each other (in other words, all-to-all). However, as said, ConScape uses the RSP framework in addition to the LCP one to compute the connectivity. Circuitscape, on the other hand, is a pioneering connectivity tool to move beyond an exclusive focus on the least-cost path connecting two points to considering all paths following a random walk process (based on the movement of electricity on an electrical network). However, Circuitscape’s main use case is not focussed on an all-to-all connectivity assessment, but instead aims at identifying corridors between a limited number of areas."
+    "text": "Warning\n\n\n\nThe site is not yet live, this is only for testing purposes!\n\n\n\nWelcome\nConScape (i.e. “connected landscapes”) is a software library implemented in the high-performance open-source Julia language to compute landscape ecological metrics — originally developed in metapopulation ecology (such as ‘metapopulation capacity’ and ‘probability of connectivity’) — for large landscapes. Moreover,in addition to traditional distance metrics used in ecology (i.e. Euclidean and least-cost distance), ConScape implements the randomized shortest paths framework to represent connectivity along the continuum from optimal to random movements.\nBuilt by a team of ecologists, network scientists and software developers, ConScape is able to efficiently compute landscape metrics for high-resolution landscape representations to leverage the availability of large data for sustainable land use and biodiversity conservation. As a Julia implementation, ConScape combines computational efficiency with a transparent code base, which facilitates continued innovation through contributions from the rapidly growing community of landscape and connectivity modellers using Julia.\n\n\nConScape’s origin story\nConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in Circuitscape). The name ConScape itself refers not only to ‘Connected Landscapes’, but also to Conefor + Circuitscape as a testimony to this legacy.\nConScape has a similar focus as Conefor in that it aims at assessing the landscape network as a whole, i.e. it connects all landscape units (e.g. pixels) to each other (in other words, all-to-all). However, as said, ConScape uses the RSP framework in addition to the LCP one to compute the connectivity. Circuitscape, on the other hand, is a pioneering connectivity tool to move beyond an exclusive focus on the least-cost path connecting two points to considering all paths following a random walk process (based on the movement of electricity on an electrical network). However, Circuitscape’s main use case is not focussed on an all-to-all connectivity assessment, but instead aims at identifying corridors between a limited number of areas."
   },
   {
     "objectID": "notebooks/index.html",
@@ -144,14 +144,7 @@
     "href": "posts/ConScape_goes-live/index.html",
     "title": "ConScape goes live",
     "section": "",
-    "text": "This is a post with executable code.\n\n1 + 1\n\n2"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome to the ConScape Blog",
-    "section": "",
-    "text": "This is the first post in a ConScape blog. Welcome!\n\nWelcome to the ConScape blog!\nWe will give it a try to keep in touch through a blog. We need to think a bit on how we will use this…"
+    "text": "After several years of hard work, in April 22, 2022, we published the ConScape library in Methods in Ecology and Evolution here. We are now developing a website to serve users with updates and supplementary information based on feedback we are receiving. So, please, get in touch for questions, issue, etc."
   },
   {
     "objectID": "quick_start.html",
@@ -165,6 +158,6 @@
     "href": "team.html",
     "title": "The team and contact",
     "section": "",
-    "text": "Contact\n\n\nThe team"
+    "text": "Contact\nYou can contact the corresponding author here\n\n\nThe team"
   }
 ]
