@@ -2,6 +2,11 @@
 title: "Welcome"
 ---
 
+::: {.callout-warning}
+The site is not yet live, this is only for testing purposes! 
+:::
+
+
 # Welcome
 
 ConScape (i.e. "connected landscapes") is a software library implemented in the high-performance open-source Julia language to compute landscape ecological metrics — originally developed in metapopulation ecology (such as ‘metapopulation capacity’ and ‘probability of connectivity’) — for large landscapes. Moreover,in addition to traditional distance metrics used in ecology (i.e. Euclidean and least-cost distance), ConScape implements the randomized shortest paths framework to represent connectivity along the continuum from optimal to random movements.

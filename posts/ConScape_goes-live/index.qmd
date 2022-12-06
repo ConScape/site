@@ -2,12 +2,8 @@
 title: "ConScape goes live"
 author: "Bram van Moorter"
 date: "2022-12-05"
-categories: [news, code, analysis]
+categories: [news]
 image: "stickerConScape.png"
 ---
 
-This is a post with executable code.
-
-```{julia}
-1 + 1
-```
+After several years of hard work, in April 22, 2022, we published the ConScape library in Methods in Ecology and Evolution [here](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.13850). We are now developing a website to serve users with updates and supplementary information based on feedback we are receiving. So, please, get in touch for questions, issue, etc.
