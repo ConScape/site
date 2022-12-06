@@ -1,13 +1,7 @@
 {
   "listingMap": {
-    "misc\\index.qmd": [
-      "faq"
-    ],
     "blog.qmd": [
       "posts"
-    ],
-    "misc\\faq.qmd": [
-      "faq"
     ],
     "faqV2.qmd": [
       "faq"

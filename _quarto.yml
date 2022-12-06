@@ -4,8 +4,8 @@ project:
 website:
   page-navigation: true
   title: "ConScape - the docs"
-  site-url: "https://openscapes.github.io/quarto-website-tutorial" 
-  repo-url: https://github.com/openscapes/quarto-website-tutorial 
+  site-url: "https://conscape.github.io/site" 
+  repo-url: https://conscape.github.io/site 
 
   page-footer: 
     right: "This page is powered by [Quarto](https://quarto.org/)."
