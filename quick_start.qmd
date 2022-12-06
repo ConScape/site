@@ -1,0 +1,53 @@
+---
+title: "Quick start"
+---
+
+# Quick start
+
+## Julia
+
+ConScape is a library for the [Julia programming language](https://julialang.org/) ([Why Julia?](https://en.wikipedia.org/wiki/Julia_(programming_language))).
+
+\note{While it certainly is inconvenient to use an unfamiliar programming language, Julia is similar to other programming languages like R or python. Hence, using the notebooks provided here will get anybody with a background in other programming languages started right away. For a [comparison between Julia and R](https://datascience-enthusiast.com/R/R_Julia_cheat_sheet.html) for basic matrix and vector notations.}
+
+
+### Installation
+
+Julia can be downloaded [here](https://julialang.org/downloads/)
+
+::: {.callout-warning}
+ConScape requires a julia version **≥ 1.6**
+:::
+
+A nice youtube tutorial on the installation of Julia and the integrated development environment VS Code:
+
+[![YT thumbnail](https://img.youtube.com/vi/oi5dZxPGNlk/0.jpg)](https://www.youtube.com/watch?v=oi5dZxPGNlk)
+
+
+### Running
+
+There are several integrated development environments for Julia, we use VS Code ourselves (which is easy to set up and use as shown [here](https://www.youtube.com/watch?v=oi5dZxPGNlk)).
+
+For R users, it seems that the Rstudio team is working on a multi language environment that also would support Julia. We will follow this with great interest.
+
+
+## Installation ConScape
+
+To install ConScape from Julia's package manager:
+
+```julia-repl
+(v1.6) pkg> add ConScape
+```
+
+or easier, directly from Julia:
+
+```julia-repl
+julia> using Pkg
+julia> Add.pkg("ConScape")
+julia> using ConScape
+```
+
+## From here...
+
+Now you are ready to start with the first [notebook](/notebooks/nbk_getting_started.qmd) presenting a basic workflow for connectivity analysis using ConScape.
+

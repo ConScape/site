@@ -1,0 +1,59 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  title: "ConScape - the docs"
+  site-url: "https://openscapes.github.io/quarto-website-tutorial" 
+  repo-url: https://github.com/openscapes/quarto-website-tutorial 
+
+  page-footer: 
+    right: "This page is powered by [Quarto](https://quarto.org/)."
+
+  sidebar: 
+    logo: "images/stickerConScape.png"
+    pinned: true
+    align: center
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:
+      - section: "Home"
+        contents:
+          - href: index.qmd
+            text: Welcome
+          - href: quick_start.qmd
+            text: Quick start
+      - href: background.qmd
+        text: Background
+      - section: applications/index.qmd
+        contents:
+          - href: applications/GI.qmd
+            text: Green infrastructure
+          - href: applications/EIA.qmd
+            text: Environmental impact assessment
+      - section: "Tutorials"
+        contents: 
+        - href: notebooks/index.qmd
+          text: Overview
+        - notebooks/nbk_getting_started.qmd
+        - notebooks/nbk_2.qmd
+      - faq.qmd
+      - faqV2.qmd
+      - glossary.qmd
+      - acknowledgments.qmd
+      - team.qmd
+      - blog.qmd
+       
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+    code-copy: true
+    code-overflow: wrap
+    css: styles.css
+    toc: true
+
+
+

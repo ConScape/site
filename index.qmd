@@ -1,0 +1,15 @@
+---
+title: "Welcome"
+---
+
+# Welcome
+
+ConScape (i.e. "connected landscapes") is a software library implemented in the high-performance open-source Julia language to compute landscape ecological metrics — originally developed in metapopulation ecology (such as ‘metapopulation capacity’ and ‘probability of connectivity’) — for large landscapes. Moreover,in addition to traditional distance metrics used in ecology (i.e. Euclidean and least-cost distance), ConScape implements the randomized shortest paths framework to represent connectivity along the continuum from optimal to random movements.
+
+Built by a team of ecologists, network scientists and software developers, ConScape is able to efficiently compute landscape metrics for high-resolution landscape representations to leverage the availability of large data for sustainable land use and biodiversity conservation. As a Julia implementation, ConScape combines computational efficiency with a transparent code base, which facilitates continued innovation through contributions from the rapidly growing community of landscape and connectivity modellers using Julia.
+
+# ConScape's origin story
+
+ConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in [Circuitscape](https://circuitscape.org/)). The name ConScape itself refers not only to 'Connected Landscapes', but also to **Con**efor + Circuit**scape** as a testimony to this legacy.  
+
+ConScape has a similar focus as Conefor in that it aims at assessing the landscape network as a whole, i.e. it connects all landscape units (e.g. pixels) to each other (in other words, all-to-all). However, as said, ConScape uses the RSP framework in addition to the LCP one to compute the connectivity. Circuitscape, on the other hand, is a pioneering connectivity tool to move beyond an exclusive focus on the least-cost path connecting two points to considering all paths following a random walk process (based on the movement of electricity on an electrical network). However, Circuitscape's main use case is not focussed on an all-to-all connectivity assessment, but instead aims at identifying corridors between a limited number of areas. 

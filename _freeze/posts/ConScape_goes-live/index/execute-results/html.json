@@ -1,0 +1,11 @@
+{
+  "hash": "99fe00233a92cce07186079bf04bd0c1",
+  "result": {
+    "markdown": "---\ntitle: \"ConScape goes live\"\nauthor: \"Bram van Moorter\"\ndate: \"2022-12-05\"\ncategories: [news, code, analysis]\nimage: \"stickerConScape.png\"\n---\n\nThis is a post with executable code.\n\n::: {.cell execution_count=1}\n``` {.julia .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n2\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

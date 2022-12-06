@@ -1,0 +1,289 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Welcome\nConScape (i.e. “connected landscapes”) is a software library implemented in the high-performance open-source Julia language to compute landscape ecological metrics — originally developed in metapopulation ecology (such as ‘metapopulation capacity’ and ‘probability of connectivity’) — for large landscapes. Moreover,in addition to traditional distance metrics used in ecology (i.e. Euclidean and least-cost distance), ConScape implements the randomized shortest paths framework to represent connectivity along the continuum from optimal to random movements.\nBuilt by a team of ecologists, network scientists and software developers, ConScape is able to efficiently compute landscape metrics for high-resolution landscape representations to leverage the availability of large data for sustainable land use and biodiversity conservation. As a Julia implementation, ConScape combines computational efficiency with a transparent code base, which facilitates continued innovation through contributions from the rapidly growing community of landscape and connectivity modellers using Julia.\n\n\nConScape’s origin story\nConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in Circuitscape). The name ConScape itself refers not only to ‘Connected Landscapes’, but also to Conefor + Circuitscape as a testimony to this legacy.\nConScape has a similar focus as Conefor in that it aims at assessing the landscape network as a whole, i.e. it connects all landscape units (e.g. pixels) to each other (in other words, all-to-all). However, as said, ConScape uses the RSP framework in addition to the LCP one to compute the connectivity. Circuitscape, on the other hand, is a pioneering connectivity tool to move beyond an exclusive focus on the least-cost path connecting two points to considering all paths following a random walk process (based on the movement of electricity on an electrical network). However, Circuitscape’s main use case is not focussed on an all-to-all connectivity assessment, but instead aims at identifying corridors between a limited number of areas."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "notebooks/nbk1.html",
+    "href": "notebooks/nbk1.html",
+    "title": "Getting started with ConScape",
+    "section": "",
+    "text": "This tutorial is very similar to the notebook in Appendix A from van Moorter et al. (2022). For a broad overview of the ConScape library, please refer to van Moorter et al. (2022).\nIn this first notebook we demonstrate the basic workflow as presented in van Moorter et al. (2022) to compute the amount of connected habitat and the movement flow in four steps: 1. data import and Grid creation; 2. computation of the GridRSP; 3. computation of the amount of connected habitat; 4. movement flow in two variants (weighted by quality or by proximity)."
+  },
+  {
+    "objectID": "notebooks/nbk1.html#maybe-a-note-to-install-julia-here-and-a-few-links",
+    "href": "notebooks/nbk1.html#maybe-a-note-to-install-julia-here-and-a-few-links",
+    "title": "Getting started with ConScape",
+    "section": "# Maybe a note to install Julia here, and a few links?",
+    "text": "# Maybe a note to install Julia here, and a few links?"
+  },
+  {
+    "objectID": "notebooks/nbk1.html#install-conscape",
+    "href": "notebooks/nbk1.html#install-conscape",
+    "title": "Getting started with ConScape",
+    "section": "Install ConScape",
+    "text": "Install ConScape\nIn the first time we use ConsCape, we need to install the library. This step can be ignored in the afterwards, unless the user wants to reinstall or update the ConScape library to a new version.\nWithin the Julia environment, installing ConScape is as simple as:\n\n# load Pkg library\nusing Pkg\n# install ConScape\nPkg.add(\"ConScape\")\n\nWe will also install other libraries that will be used in this notebook, but they are not necessary to run ConScape.\n\n# complementary libraries, to be used in this notebook\nPkg.add(\"Rasters\")"
+  },
+  {
+    "objectID": "notebooks/nbk1.html#load-libraries",
+    "href": "notebooks/nbk1.html#load-libraries",
+    "title": "Getting started with ConScape",
+    "section": "Load libraries",
+    "text": "Load libraries\nWe continue, and usually would start, by loading the required libraries.\n\n# load libraries\nusing Pkg\nusing ConScape\nusing Plots\n\nThis step is similar to using the library() function in R or the import command in Python.\nWhen setting up the environment, it is also useful to setup the path to the folders where the input data are located and where we want to write the results of our analysis. Here we set the datadir data folder to the folder where the internal ConScape example datasets are saved, after the library is installed.\n\n# path to files\n# Pkg.activate(joinpath(ENV[\"HOMEPATH\"], \".julia\", \"packages\", \"ConScape\", \"spkWs\", \"data\"))\n\n# set folders\ndatadir = joinpath(ENV[\"HOMEPATH\"], \".julia\", \"packages\", \"ConScape\", \"spkWs\", \"data\")\noutdir = joinpath(ENV[\"TMP\"], \"figures\")\n# created the output folder, if it does not exist\nif !isdir(outdir)\n    mkdir(outdir)\nend"
+  },
+  {
+    "objectID": "notebooks/nbk1.html#import-data",
+    "href": "notebooks/nbk1.html#import-data",
+    "title": "Getting started with ConScape",
+    "section": "Import data",
+    "text": "Import data\nWe start by importing and checking the input data to be used in ConScape. The first ConScape function is a helper to read maps in ASCII format, the function readasc():\n\ndatadir = \"P:/12084000_egenutvikling_bram_van_moorter/Conscape_development/test/data/\"\n# read habitat quality raster\nhab_qual, meta_q = ConScape.readasc(joinpath(datadir, \"hab_qual_1000.asc\"))\n# read movemement probability raster\nmov_prob, meta_p = ConScape.readasc(joinpath(datadir, \"mov_prob_1000.asc\"))\n\n([NaN NaN … NaN NaN; NaN NaN … NaN NaN; … ; NaN NaN … NaN NaN; NaN NaN … NaN NaN], Dict{Any, Any}(\"cellsize\" => 1000.0, \"nrows\" => 87, \"nodata_value\" => -9999, \"ncols\" => 117, \"xllcorner\" => 110650.0, \"yllcorner\" => 6.89575e6))\n\n\nThe function reads the map as a matrix and the meta data from the ASCII grid as a dictionary. ConScape natively reads ASC files, however, Julia allows easy reading of maps in other file formats through other libraries, for instance:\nThis chunk below is not working!!! Missing file!! Wouldn’t it be much easier to create a function readrast within ConScape? Or this would increase the dependencies (to Rasters), which is undesiderable?\n\n# load Rasters library\nusing Rasters\n# read habitat quality using Rasters()\nhab_qual = Raster(joinpath(datadir, \"hab_qual_1000_tif.tif\"))\n\nSuch a raster can easily be converted to a matrix for use in ConScape:\n\n# Replace missing values by NaN and transform into a matrix\nhab_qual = replace_missing(hab_qual, NaN)\nhab_qual = Matrix(transpose(Array(hab_qual)[:,:,1]))\n\nThe meta data can be used to verify that the maps are representing the same geographic domain (i.e. cell size/resolution, number of rows and columns, xy-coordinates of the lower left corner):\nWhich of the following options should we use? They were present in different versions of the notebook\n\nvalues(meta_p)\ncollect(values(meta_p))[1:end .!= 3]\ncollect(values(meta_p))[1:end .!= 3] == collect(values(meta_q))[1:end .!= 3]\n\ntrue\n\n\n\ndelete!(meta_p, \"nodata_value\")\ndelete!(meta_q, \"nodata_value\")\nmeta_p == meta_q\n\nTo ensure that the cells with values match, we conduct the following check and remove non-matching cells:\nCheck here\n\nnon_matches = findall(xor.(isnan.(mov_prob), isnan.(hab_qual)))\nmov_prob[non_matches] .= NaN\nhab_qual[non_matches] .= NaN;"
+  },
+  {
+    "objectID": "notebooks/nbk1.html#create-a-grid-object",
+    "href": "notebooks/nbk1.html#create-a-grid-object",
+    "title": "Getting started with ConScape",
+    "section": "Create a Grid object",
+    "text": "Create a Grid object\nDefine a ConScape Grid:\n\nadjacency_matrix = ConScape.graph_matrix_from_raster(mov_prob)\ng = ConScape.Grid(size(mov_prob)..., \n                    affinities = adjacency_matrix,\n                    source_qualities = hab_qual,\n                    target_qualities = ConScape.sparse(hab_qual),\n                    costs = ConScape.mapnz(x -> -log(x), adjacency_matrix))\n\n┌ Info: cost graph contains 4927 strongly connected subgraphs\n└ @ ConScape C:\\Users\\bram.van.moorter\\.julia\\packages\\ConScape\\spkWs\\src\\grid.jl:215\n┌ Info: removing 4926 nodes from affinity and cost graphs\n└ @ ConScape C:\\Users\\bram.van.moorter\\.julia\\packages\\ConScape\\spkWs\\src\\grid.jl:225\n\n\n\nConScape.Grid of size 87x117Affinities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\nSource qualities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\nTarget qualities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\nA ConScape Grid describes a graph from a grid of adjacent cells or pixels. It requires four main inputs: the quality of each pixel both as a source and as a target, the affinity between i and j (i.e. probabilities of moving between adjacent pixels i and j), and the cost of moving between between i and j. However, these four inputs can be reduced, for instance, by considering the quality of a pixel identical as a source and target, or by defining the cost as a function of the affinities (e.g. a logarithmic relationship). For our illustration, we introduced those two simplifications and only provided two independent data: the quality of a pixel (identical as source and as target) and the likelihood of moving between adjacent pixels. The likelihood of moving between adjacent pixels i and j was derived from a ‘permeability map’, which describes the permeability of a pixel i (and is similar to the conductivity in circuit theory). The function graph matrix from raster computes the values for an i − j pair from the map either by the average permeability of i and j (AverageWeight) or by the permeability of the target pixel j (TargetWeight; the default); the neighbors of a pixel can be defined either as rook (N4) or as queen (N8; the default).\nFrom the Grid, we can plot the qualities of the pixels:\n\nConScape.heatmap(g.source_qualities, yflip = true, \n                    title = \"Map of habitat uality\", \n                    color = cgrad([:white, :green]))\n# savefig(\"figure_grid_outdeg.png\")\n\n\n\n\nAnd the permeability:\n\nConScape.plot_outdegrees(g, title = \"Map of permeability to movement\", color = cgrad(:acton))\n\n\n\n\n\ntypeof(g.source_qualities)\n\nMatrix{Float64} (alias for Array{Float64, 2})\n\n\n\ntypeof(g.affinities)\ntypeof(g.costmatrix)\ntypeof(g.costmatrix)\n\nSparseArrays.SparseMatrixCSC{Float64, Int64}\n\n\n\n(g.nrows, g.ncols, g.nrows*g.ncols)\n\n(87, 117, 10179)"
+  },
+  {
+    "objectID": "misc/index.html",
+    "href": "misc/index.html",
+    "title": "FAQ",
+    "section": "",
+    "text": "Why is ConScape implemented in Julia?\nThis question usually continues with “instead of R”. There are two reasons, first, Julia is a high-performance language that combines the performance of C with the readability of a language like R. For instance, all libraries in R that do performance critical computations, such as the “spatial absorbing Markov chain” library, are wrappers around C code. This introduces what has been called the provlem of “two languages”, i.e. that one has to master two languages (in this case R and C) to use the library in a flexible way or contribute to its further development. As a side note, while the preformance benchmark, C is not a very easy language to read or write. Here comes in Julia, it has a performance very close to C, but the readability of R. It is therefore relatively easy for someone with some programming background (as any intermediate to advanced R user) to use the library in a flexible way and hopefully also contribute to its further development. A second reason was that Julia was also adopted by Circuitscape for its latest implementation, which will facilitate collaboration and community contributions from a broader group of landscape connectivity modelers.\nAs we do appreciate the challenge associated with working in a new programming language, we did develop a large set of notebooks to serve as templates to modify for your own purposes. Indeed, our own experience with using Julia and ConScape did rely adjusting existing code at first. Hence, we encourage you to give it a try, it is by no means as daunting as it may seem (to get started).\n\n\nWhich value to choose for theta (\\(\\theta\\)), or the randomness of the paths between source and target?\nA difficult question… First, testing different values of \\(\\theta\\) will allow you to assess the sensitivity of your results to this crucial parameter. Furthermore, several efforts exist to estimate \\(\\theta\\) from movement data, for instance: Kivimäki et al. 2020, and Panzacchi et al. 2015.\n\n\nWhere can I find the test data for the notebooks?\nHere in the github repository of the ConScape library\n\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 2, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "ConScape goes live\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nBram van Moorter\n\n\n\n\n\n\n  \n\n\n\n\nWelcome to the ConScape Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nDec 5, 2022\n\n\nBram van Moorter\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "background.html",
+    "href": "background.html",
+    "title": "Background",
+    "section": "",
+    "text": "Panzacchi et al. 2015 shows the first application of the randomized shortest paths framework in combination with step selection functions.\nVan Moorter et al. 2021 presents a framework to scale up step selection functions to assess effective connectivity using the randomized shortest paths framework. This paper presents an extensive discussion of the RSP in an ecological context.\nVan Moorter et al. 2022 is the core publication of the ConScape library, and should be cited for the library."
+  },
+  {
+    "objectID": "background.html#our-publications",
+    "href": "background.html#our-publications",
+    "title": "Background",
+    "section": "Our publications:",
+    "text": "Our publications:\nPanzacchi et al. 2015 shows the first application of the randomized shortest paths framework in combination with step selection functions.\nVan Moorter et al. 2021 presents a framework to scale up step selection functions to assess effective connectivity using the randomized shortest paths framework. This paper presents an extensive discussion of the RSP in an ecological context.\nVan Moorter et al. 2022 is the core publication of the ConScape library, and should be cited for the library."
+  },
+  {
+    "objectID": "misc/glossary.html",
+    "href": "misc/glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "Quality of habitat\nThe quality of habitat refers to the contribution of the local environmental conditions to a population in terms of fitness.\n\n\nPermeability of habitat\nThe permeability of habitat for movement refers to the effect of local environmental conditions on: (1) the likelihood of movement, and (2) the cost of movement. See for Fletcher et al. 2019 and Van Moorter et al. 2021 for further discussion.\n\n\nResource selection function\nSee Boyce and McDonald 1999\n\n\nStep selection function\nSee Fortin et al. 2005"
+  },
+  {
+    "objectID": "misc/acknowledgments.html",
+    "href": "misc/acknowledgments.html",
+    "title": "Acknowledgments",
+    "section": "",
+    "text": "Contributors\n\n\nFunding"
+  },
+  {
+    "objectID": "applications/index.html",
+    "href": "applications/index.html",
+    "title": "Applications",
+    "section": "",
+    "text": "Applications of ConScape\nConScape is being used for different ecological applications from cumulative impact assessment, spatial conservation prioritization, to green infrastructure mapping for biodiversity conservation.\n\nclick Assessment of impact of anthropogenic infrastructures for wild reindeer habitat loss and fragmentation,\nclick Green infrastructure mapping for biodiversity conservation,"
+  },
+  {
+    "objectID": "applications/GI.html",
+    "href": "applications/GI.html",
+    "title": "Green infrastructure mapping",
+    "section": "",
+    "text": "Go here for an application of ConScape for green infrastructure mapping, including interactive web maps in the Google Earth Engine:\n\nSpecies-specific ecological networks: where you can view landscapes from a species perspective using the Ecological Network Mapping Tool,\nComparison with pixel-based maps: where you can compare traditional, pixel-focussed maps to green infrastructure, network-based maps,\nGI prioritization: where you can identify priority areas for multi-species conservation using the Land Prioritization Tool."
+  },
+  {
+    "objectID": "applications/EIA.html",
+    "href": "applications/EIA.html",
+    "title": "Environmental Impact Assessment",
+    "section": "",
+    "text": "Environmental Impact Assessment – EIA\n\n\n\n\n\n\nNote\n\n\n\nAssessment of impact of anthropogenic infrastructures for wild reindeer habitat loss and fragmentation.\n\n\nGo here for an application of ConScape for reindeer habitat assessments, including interactive web maps in the Google Earth Engine:\n\nWild reindeer maps: where you can explore maps produced using analytical approaches to illustrate how reindeer view the landscape in terms of suitable resources, functional areas, corridors, barriers, and human footprint,\nComparison with expert-based maps: where you can compare maps produced using analytical approaches (using also ConScape) to maps produced through expert assessment for the Norwegian Wild Reindeer Quality Norm assessment - Delnorm 3."
+  },
+  {
+    "objectID": "misc/faq.html",
+    "href": "misc/faq.html",
+    "title": "FAQ",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nDec 5, 2022\n\n\nWhere can I find the test data for the notebooks?\n\n\nBram van Moorter\n\n\n\n\nDec 5, 2022\n\n\nWhich value to choose for theta ($ heta$)?\n\n\nBram van Moorter\n\n\n\n\nDec 5, 2022\n\n\nWhy is ConScape implemented in Julia?\n\n\nBram van Moorter\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/ConScape_goes-live/index.html",
+    "href": "posts/ConScape_goes-live/index.html",
+    "title": "ConScape goes live",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n2"
+  },
+  {
+    "objectID": "misc/faq/2022_where_are_the_test_data/index.html",
+    "href": "misc/faq/2022_where_are_the_test_data/index.html",
+    "title": "Where can I find the test data for the notebooks?",
+    "section": "",
+    "text": "Here in the github repository of the ConScape library"
+  },
+  {
+    "objectID": "misc/faq/2022_which_value_for_theta/index.html",
+    "href": "misc/faq/2022_which_value_for_theta/index.html",
+    "title": "Which value to choose for theta ($ heta$)?",
+    "section": "",
+    "text": "In other words: “which level of randomness for the paths between source and target?”\nA difficult question… First, testing different values of \\(\\theta\\) will allow you to assess the sensitivity of your results to this crucial parameter. Furthermore, several efforts exist to estimate \\(\\theta\\) from movement data, for instance: Kivimäki et al. 2020, and Panzacchi et al. 2015."
+  },
+  {
+    "objectID": "misc/faq/2022_why_julia/index.html",
+    "href": "misc/faq/2022_why_julia/index.html",
+    "title": "Why is ConScape implemented in Julia?",
+    "section": "",
+    "text": "This question usually continues with “instead of R”. There are two reasons, first, Julia is a high-performance language that combines the performance of C with the readability of a language like R. For instance, all libraries in R that do performance critical computations, such as the “spatial absorbing Markov chain” library, are wrappers around C code. This introduces what has been called the provlem of “two languages”, i.e. that one has to master two languages (in this case R and C) to use the library in a flexible way or contribute to its further development. As a side note, while the preformance benchmark, C is not a very easy language to read or write. Here comes in Julia, it has a performance very close to C, but the readability of R. It is therefore relatively easy for someone with some programming background (as any intermediate to advanced R user) to use the library in a flexible way and hopefully also contribute to its further development. A second reason was that Julia was also adopted by Circuitscape for its latest implementation, which will facilitate collaboration and community contributions from a broader group of landscape connectivity modelers.\nAs we do appreciate the challenge associated with working in a new programming language, we did develop a large set of notebooks to serve as templates to modify for your own purposes. Indeed, our own experience with using Julia and ConScape did rely adjusting existing code at first. Hence, we encourage you to give it a try, it is by no means as daunting as it may seem (to get started)."
+  },
+  {
+    "objectID": "misc/faq/post-with-code/index.html",
+    "href": "misc/faq/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html",
+    "href": "notebooks/nbk_getting_started.html",
+    "title": "Getting started",
+    "section": "",
+    "text": "Here you will learn\n\n\n\nThe basics of ConScape: importing data, running basic analyses, and exporting resulting maps.\nThis tutorial is very similar to the notebook in Appendix A from van Moorter et al. (2022). For a broad overview of the ConScape library, please refer to van Moorter et al. (2022).\nIn this first notebook we demonstrate the basic workflow as presented in van Moorter et al. (2022) to compute the amount of connected habitat and the movement flow in four steps: 1. data import and Grid creation; 2. computation of the GridRSP; 3. computation of the amount of connected habitat; 4. movement flow in two variants (weighted by quality or by proximity)."
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html#maybe-a-note-to-install-julia-here-and-a-few-links",
+    "href": "notebooks/nbk_getting_started.html#maybe-a-note-to-install-julia-here-and-a-few-links",
+    "title": "Getting started",
+    "section": "# Maybe a note to install Julia here, and a few links?",
+    "text": "# Maybe a note to install Julia here, and a few links?"
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html#install-conscape",
+    "href": "notebooks/nbk_getting_started.html#install-conscape",
+    "title": "Getting started",
+    "section": "Install ConScape",
+    "text": "Install ConScape\nIn the first time we use ConsCape, we need to install the library. This step can be ignored in the afterwards, unless the user wants to reinstall or update the ConScape library to a new version.\nWithin the Julia environment, installing ConScape is as simple as:\n\n# load Pkg library\nusing Pkg\n# install ConScape\nPkg.add(\"ConScape\")\n\nWe will also install other libraries that will be used in this notebook, but they are not necessary to run ConScape.\n\n# complementary libraries, to be used in this notebook\nPkg.add(\"Rasters\")"
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html#load-libraries",
+    "href": "notebooks/nbk_getting_started.html#load-libraries",
+    "title": "Getting started",
+    "section": "Load libraries",
+    "text": "Load libraries\nWe continue, and usually would start, by loading the required libraries.\n\n# load libraries\nusing Pkg\nusing ConScape\nusing Plots\n\nThis step is similar to using the library() function in R or the import command in Python.\nWhen setting up the environment, it is also useful to setup the path to the folders where the input data are located and where we want to write the results of our analysis. Here we set the datadir data folder to the folder where the internal ConScape example datasets are saved, after the library is installed.\n\n# path to files\n# Pkg.activate(joinpath(ENV[\"HOMEPATH\"], \".julia\", \"packages\", \"ConScape\", \"spkWs\", \"data\"))\n\n# set folders\ndatadir = joinpath(ENV[\"HOMEPATH\"], \".julia\", \"packages\", \"ConScape\", \"spkWs\", \"data\")\noutdir = joinpath(ENV[\"TMP\"], \"figures\")\n# created the output folder, if it does not exist\nif !isdir(outdir)\n    mkdir(outdir)\nend"
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html#import-data",
+    "href": "notebooks/nbk_getting_started.html#import-data",
+    "title": "Getting started",
+    "section": "Import data",
+    "text": "Import data\nWe start by importing and checking the input data to be used in ConScape. The first ConScape function is a helper to read maps in ASCII format, the function readasc():\n\ndatadir = \"P:/12084000_egenutvikling_bram_van_moorter/Conscape_development/test/data/\"\n# read habitat quality raster\nhab_qual, meta_q = ConScape.readasc(joinpath(datadir, \"hab_qual_1000.asc\"))\n# read movemement probability raster\nmov_prob, meta_p = ConScape.readasc(joinpath(datadir, \"mov_prob_1000.asc\"))\n\n([NaN NaN … NaN NaN; NaN NaN … NaN NaN; … ; NaN NaN … NaN NaN; NaN NaN … NaN NaN], Dict{Any, Any}(\"cellsize\" => 1000.0, \"nrows\" => 87, \"nodata_value\" => -9999, \"ncols\" => 117, \"xllcorner\" => 110650.0, \"yllcorner\" => 6.89575e6))\n\n\nThe function reads the map as a matrix and the meta data from the ASCII grid as a dictionary. ConScape natively reads ASC files, however, Julia allows easy reading of maps in other file formats through other libraries, for instance:\nThis chunk below is not working!!! Missing file!! Wouldn’t it be much easier to create a function readrast within ConScape? Or this would increase the dependencies (to Rasters), which is undesiderable?\n\n# load Rasters library\nusing Rasters\n# read habitat quality using Rasters()\nhab_qual = Raster(joinpath(datadir, \"hab_qual_1000_tif.tif\"))\n\nSuch a raster can easily be converted to a matrix for use in ConScape:\n\n# Replace missing values by NaN and transform into a matrix\nhab_qual = replace_missing(hab_qual, NaN)\nhab_qual = Matrix(transpose(Array(hab_qual)[:,:,1]))\n\nThe meta data can be used to verify that the maps are representing the same geographic domain (i.e. cell size/resolution, number of rows and columns, xy-coordinates of the lower left corner):\nWhich of the following options should we use? They were present in different versions of the notebook\n\nvalues(meta_p)\ncollect(values(meta_p))[1:end .!= 3]\ncollect(values(meta_p))[1:end .!= 3] == collect(values(meta_q))[1:end .!= 3]\n\ntrue\n\n\n\ndelete!(meta_p, \"nodata_value\")\ndelete!(meta_q, \"nodata_value\")\nmeta_p == meta_q\n\nTo ensure that the cells with values match, we conduct the following check and remove non-matching cells:\nCheck here\n\nnon_matches = findall(xor.(isnan.(mov_prob), isnan.(hab_qual)))\nmov_prob[non_matches] .= NaN\nhab_qual[non_matches] .= NaN;"
+  },
+  {
+    "objectID": "notebooks/nbk_getting_started.html#create-a-grid-object",
+    "href": "notebooks/nbk_getting_started.html#create-a-grid-object",
+    "title": "Getting started",
+    "section": "Create a Grid object",
+    "text": "Create a Grid object\nDefine a ConScape Grid:\n\nadjacency_matrix = ConScape.graph_matrix_from_raster(mov_prob)\ng = ConScape.Grid(size(mov_prob)..., \n                    affinities = adjacency_matrix,\n                    source_qualities = hab_qual,\n                    target_qualities = ConScape.sparse(hab_qual),\n                    costs = ConScape.mapnz(x -> -log(x), adjacency_matrix))\n\n┌ Info: cost graph contains 4927 strongly connected subgraphs\n└ @ ConScape C:\\Users\\bram.van.moorter\\.julia\\packages\\ConScape\\spkWs\\src\\grid.jl:215\n┌ Info: removing 4926 nodes from affinity and cost graphs\n└ @ ConScape C:\\Users\\bram.van.moorter\\.julia\\packages\\ConScape\\spkWs\\src\\grid.jl:225\n\n\n\nConScape.Grid of size 87x117Affinities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\nSource qualities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\nTarget qualities\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  \n    \n  \n\n\n\n\n\n\n\n\n\nA ConScape Grid describes a graph from a grid of adjacent cells or pixels. It requires four main inputs: the quality of each pixel both as a source and as a target, the affinity between i and j (i.e. probabilities of moving between adjacent pixels i and j), and the cost of moving between between i and j. However, these four inputs can be reduced, for instance, by considering the quality of a pixel identical as a source and target, or by defining the cost as a function of the affinities (e.g. a logarithmic relationship). For our illustration, we introduced those two simplifications and only provided two independent data: the quality of a pixel (identical as source and as target) and the likelihood of moving between adjacent pixels. The likelihood of moving between adjacent pixels i and j was derived from a ‘permeability map’, which describes the permeability of a pixel i (and is similar to the conductivity in circuit theory). The function graph matrix from raster computes the values for an i − j pair from the map either by the average permeability of i and j (AverageWeight) or by the permeability of the target pixel j (TargetWeight; the default); the neighbors of a pixel can be defined either as rook (N4) or as queen (N8; the default).\nFrom the Grid, we can plot the qualities of the pixels:\n\nConScape.heatmap(g.source_qualities, yflip = true, \n                    title = \"Map of habitat uality\", \n                    color = cgrad([:white, :green]))\n# savefig(\"figure_grid_outdeg.png\")\n\n\n\n\nAnd the permeability:\n\nConScape.plot_outdegrees(g, title = \"Map of permeability to movement\", color = cgrad(:acton))\n\n\n\n\n\ntypeof(g.source_qualities)\n\nMatrix{Float64} (alias for Array{Float64, 2})\n\n\n\ntypeof(g.affinities)\ntypeof(g.costmatrix)\ntypeof(g.costmatrix)\n\nSparseArrays.SparseMatrixCSC{Float64, Int64}\n\n\n\n(g.nrows, g.ncols, g.nrows*g.ncols)\n\n(87, 117, 10179)"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome to the ConScape Blog",
+    "section": "",
+    "text": "This is the first post in a ConScape blog. Welcome!\n\nWelcome to the ConScape blog!\nWe will give it a try to keep in touch through a blog. We need to think a bit on how we will use this…"
+  },
+  {
+    "objectID": "quick_start.html",
+    "href": "quick_start.html",
+    "title": "Quick start",
+    "section": "",
+    "text": "ConScape is a library for the Julia programming language (Why Julia?).\n\n\nJulia can be downloaded here\n\n\n\n\n\n\nWarning\n\n\n\nConScape requires a julia version ≥ 1.6\n\n\nA nice youtube tutorial on the installation of Julia and the integrated development environment VS Code:\n\n\n\nYT thumbnail\n\n\n\n\n\nThere are several integrated development environments for Julia, we use VS Code ourselves (which is easy to set up and use as shown here).\nFor R users, it seems that the Rstudio team is working on a multi language environment that also would support Julia. We will follow this with great interest.\n\n\n\n\nTo install ConScape from Julia’s package manager:\n(v1.6) pkg> add ConScape\nor easier, directly from Julia:\njulia> using Pkg\njulia> Add.pkg(\"ConScape\")\njulia> using ConScape\n\n\n\nNow you are ready to start with the first notebook presenting a basic workflow for connectivity analysis using ConScape."
+  },
+  {
+    "objectID": "faq.html",
+    "href": "faq.html",
+    "title": "FAQ",
+    "section": "",
+    "text": "Why is ConScape implemented in Julia?\nThis question usually continues with “instead of R”. There are two reasons, first, Julia is a high-performance language that combines the performance of C with the readability of a language like R. For instance, all libraries in R that do performance critical computations, such as the “spatial absorbing Markov chain” library, are wrappers around C code. This introduces what has been called the provlem of “two languages”, i.e. that one has to master two languages (in this case R and C) to use the library in a flexible way or contribute to its further development. As a side note, while the preformance benchmark, C is not a very easy language to read or write. Here comes in Julia, it has a performance very close to C, but the readability of R. It is therefore relatively easy for someone with some programming background (as any intermediate to advanced R user) to use the library in a flexible way and hopefully also contribute to its further development. A second reason was that Julia was also adopted by Circuitscape for its latest implementation, which will facilitate collaboration and community contributions from a broader group of landscape connectivity modelers.\nAs we do appreciate the challenge associated with working in a new programming language, we did develop a large set of notebooks to serve as templates to modify for your own purposes. Indeed, our own experience with using Julia and ConScape did rely adjusting existing code at first. Hence, we encourage you to give it a try, it is by no means as daunting as it may seem (to get started).\n\n\nWhich value to choose for theta (\\(\\theta\\))?\nIn other words: “which level of randomness for the paths between source and target?”\nA difficult question… First, testing different values of \\(\\theta\\) will allow you to assess the sensitivity of your results to this crucial parameter. Furthermore, several efforts exist to estimate \\(\\theta\\) from movement data, for instance: Kivimäki et al. 2020, and Panzacchi et al. 2015.\n\n\nWhere can I find the test data for the notebooks?\nHere in the github repository of the ConScape library\n\n\nI am getting empty plots"
+  },
+  {
+    "objectID": "acknowledgments.html",
+    "href": "acknowledgments.html",
+    "title": "Acknowledgments",
+    "section": "",
+    "text": "Contributors\n\n\nFunding"
+  },
+  {
+    "objectID": "faq/2022_where_are_the_test_data/index.html",
+    "href": "faq/2022_where_are_the_test_data/index.html",
+    "title": "Where can I find the test data for the notebooks?",
+    "section": "",
+    "text": "Here in the github repository of the ConScape library"
+  },
+  {
+    "objectID": "faq/2022_which_value_for_theta/index.html",
+    "href": "faq/2022_which_value_for_theta/index.html",
+    "title": "Which value to choose for theta?",
+    "section": "",
+    "text": "In other words: “which level of randomness for the paths between source and target?”\nA difficult question… First, testing different values of \\(\\theta\\) will allow you to assess the sensitivity of your results to this crucial parameter. Furthermore, several efforts exist to estimate \\(\\theta\\) from movement data, for instance: Kivimäki et al. 2020, and Panzacchi et al. 2015."
+  },
+  {
+    "objectID": "faq/2022_why_julia/index.html",
+    "href": "faq/2022_why_julia/index.html",
+    "title": "Why is ConScape implemented in Julia?",
+    "section": "",
+    "text": "This question usually continues with “instead of R”. There are two reasons, first, Julia is a high-performance language that combines the performance of C with the readability of a language like R. For instance, all libraries in R that do performance critical computations, such as the “spatial absorbing Markov chain” library, are wrappers around C code. This introduces what has been called the provlem of “two languages”, i.e. that one has to master two languages (in this case R and C) to use the library in a flexible way or contribute to its further development. As a side note, while the preformance benchmark, C is not a very easy language to read or write. Here comes in Julia, it has a performance very close to C, but the readability of R. It is therefore relatively easy for someone with some programming background (as any intermediate to advanced R user) to use the library in a flexible way and hopefully also contribute to its further development. A second reason was that Julia was also adopted by Circuitscape for its latest implementation, which will facilitate collaboration and community contributions from a broader group of landscape connectivity modelers.\nAs we do appreciate the challenge associated with working in a new programming language, we did develop a large set of notebooks to serve as templates to modify for your own purposes. Indeed, our own experience with using Julia and ConScape did rely adjusting existing code at first. Hence, we encourage you to give it a try, it is by no means as daunting as it may seem (to get started)."
+  },
+  {
+    "objectID": "faqV2.html",
+    "href": "faqV2.html",
+    "title": "FAQ",
+    "section": "",
+    "text": "I am trying a second approach to for the Frequently Asked Questions based on the Quarto listing for blogs. Thus, FAQs are treated much like blog posts.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nDec 5, 2022\n\n\nWhere can I find the test data for the notebooks?\n\n\nBram van Moorter\n\n\n\n\nDec 5, 2022\n\n\nWhich value to choose for theta?\n\n\nBram van Moorter\n\n\n\n\nDec 5, 2022\n\n\nWhy is ConScape implemented in Julia?\n\n\nBram van Moorter\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "glossary.html",
+    "href": "glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "Quality of habitat\nThe quality of habitat refers to the contribution of the local environmental conditions to a population in terms of fitness.\n\n\nPermeability of habitat\nThe permeability of habitat for movement refers to the effect of local environmental conditions on: (1) the likelihood of movement, and (2) the cost of movement. See for Fletcher et al. 2019 and Van Moorter et al. 2021 for further discussion.\n\n\nResource selection function\nSee Boyce and McDonald 1999\n\n\nStep selection function\nSee Fortin et al. 2005"
+  },
+  {
+    "objectID": "notebooks/index.html",
+    "href": "notebooks/index.html",
+    "title": "Notebooks",
+    "section": "",
+    "text": "Here I will present an annotated index of the different notebooks through a short summary.\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, warning, important, tip, and caution.\n\n\n\n\n\n\n\n\nTip With Caption\n\n\n\nThis is an example of a callout with a caption.\n\n\n\n\n\n\n\n\nExpand To Learn About Collapse\n\n\n\n\n\nThis is an example of a ‘folded’ caution callout that can be expanded by the user. You can use collapse=\"true\" to collapse it by default or collapse=\"false\" to make a collapsible callout that is expanded by default."
+  },
+  {
+    "objectID": "notebooks/nbk_2.html",
+    "href": "notebooks/nbk_2.html",
+    "title": "Second notebook",
+    "section": "",
+    "text": "Here you will learn\n\n\n\nNot sure…\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThis notebook assumes familiarity with the basics as covered in the “getting started” notebook\n\n\nIn this first notebook we demonstrate the basic workflow as presented in van Moorter et al. (2022) to compute the amount of connected habitat and the movement flow in four steps: 1. data import and Grid creation; 2. computation of the GridRSP; 3. computation of the amount of connected habitat; 4. movement flow in two variants (weighted by quality or by proximity)."
+  },
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "The team and contact",
+    "section": "",
+    "text": "Contact\n\n\nThe team"
+  }
+]

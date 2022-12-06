@@ -1,0 +1,13 @@
+---
+title: "ConScape goes live"
+author: "Bram van Moorter"
+date: "2022-12-05"
+categories: [news, code, analysis]
+image: "stickerConScape.png"
+---
+
+This is a post with executable code.
+
+```{julia}
+1 + 1
+```

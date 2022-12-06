@@ -1,0 +1,16 @@
+---
+title: "Welcome to the ConScape Blog"
+author: "Bram van Moorter"
+date: "2022-12-05"
+categories: [news]
+image: "image.jpg"
+---
+
+This is the first post in a ConScape blog. Welcome!
+
+# Welcome to the ConScape blog! 
+
+We will give it a try to keep in touch through a blog. We need to think a bit on how we will use this...
+
+![](ConScape.png)
+
