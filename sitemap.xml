@@ -2,78 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://conscape.github.io/site/acknowledgments.html</loc>
-    <lastmod>2022-12-06T13:15:48.033Z</lastmod>
+    <lastmod>2022-12-12T16:43:00.699Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/applications/EIA.html</loc>
-    <lastmod>2022-12-06T13:15:49.157Z</lastmod>
+    <lastmod>2022-12-12T16:43:02.219Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/applications/GI.html</loc>
-    <lastmod>2022-12-06T13:15:50.211Z</lastmod>
+    <lastmod>2022-12-12T16:43:04.755Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/applications/index.html</loc>
-    <lastmod>2022-12-06T13:15:51.233Z</lastmod>
+    <lastmod>2022-12-12T16:43:06.627Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/background.html</loc>
-    <lastmod>2022-12-06T13:15:52.239Z</lastmod>
+    <lastmod>2022-12-12T16:43:08.051Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/blog.html</loc>
-    <lastmod>2022-12-06T13:15:53.571Z</lastmod>
+    <lastmod>2022-12-12T16:43:09.896Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/faq/2022_where_are_the_test_data/index.html</loc>
-    <lastmod>2022-12-06T13:15:54.650Z</lastmod>
+    <lastmod>2022-12-12T16:43:11.377Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/faq/2022_which_value_for_theta/index.html</loc>
-    <lastmod>2022-12-06T13:15:55.671Z</lastmod>
+    <lastmod>2022-12-12T16:43:12.760Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/faq/2022_why_julia/index.html</loc>
-    <lastmod>2022-12-06T13:15:56.909Z</lastmod>
+    <lastmod>2022-12-12T16:43:14.247Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/faq.html</loc>
-    <lastmod>2022-12-06T13:15:57.884Z</lastmod>
+    <lastmod>2022-12-12T16:43:17.834Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/faqV2.html</loc>
-    <lastmod>2022-12-06T13:15:59.081Z</lastmod>
+    <lastmod>2022-12-12T16:43:19.516Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/glossary.html</loc>
-    <lastmod>2022-12-06T13:16:00.147Z</lastmod>
+    <lastmod>2022-12-12T16:43:22.569Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/index.html</loc>
-    <lastmod>2022-12-06T13:16:01.176Z</lastmod>
+    <lastmod>2022-12-12T16:43:24.319Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/notebooks/index.html</loc>
-    <lastmod>2022-12-06T13:16:02.189Z</lastmod>
+    <lastmod>2022-12-12T16:43:26.168Z</lastmod>
   </url>
   <url>
-    <loc>https://conscape.github.io/site/notebooks/nbk_2.html</loc>
-    <lastmod>2022-12-06T13:16:03.189Z</lastmod>
+    <loc>https://conscape.github.io/site/notebooks/nbk_cost.html</loc>
+    <lastmod>2022-12-12T16:43:29.278Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_distance_metrics.html</loc>
+    <lastmod>2022-12-12T16:43:33.075Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_functionality_variants.html</loc>
+    <lastmod>2022-12-12T16:43:37.054Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/notebooks/nbk_getting_started.html</loc>
-    <lastmod>2022-12-06T13:17:40.704Z</lastmod>
+    <lastmod>2022-12-12T16:43:41.569Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_iterative_method.html</loc>
+    <lastmod>2022-12-12T16:43:45.509Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_landmarks.html</loc>
+    <lastmod>2022-12-12T16:43:48.443Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_other_raster_formats.html</loc>
+    <lastmod>2022-12-12T16:43:49.917Z</lastmod>
+  </url>
+  <url>
+    <loc>https://conscape.github.io/site/notebooks/nbk_test.html</loc>
+    <lastmod>2022-12-12T16:43:51.393Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/posts/ConScape_goes-live/index.html</loc>
-    <lastmod>2022-12-06T13:17:41.749Z</lastmod>
+    <lastmod>2022-12-12T16:43:52.491Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/quick_start.html</loc>
-    <lastmod>2022-12-06T13:17:43.051Z</lastmod>
+    <lastmod>2022-12-12T16:43:53.837Z</lastmod>
   </url>
   <url>
     <loc>https://conscape.github.io/site/team.html</loc>
-    <lastmod>2022-12-06T13:17:44.075Z</lastmod>
+    <lastmod>2022-12-12T16:43:54.802Z</lastmod>
   </url>
 </urlset>

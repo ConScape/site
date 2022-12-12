@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -163,7 +182,22 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notebooks/nbk_2.html" class="sidebar-item-text sidebar-link">Second notebook</a>
+  <a href="../notebooks/nbk_landmarks.html" class="sidebar-item-text sidebar-link">Performance</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/nbk_distance_metrics.html" class="sidebar-item-text sidebar-link">Ecological distance</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/nbk_cost.html" class="sidebar-item-text sidebar-link">Dispersal mortality</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/nbk_functionality_variants.html" class="sidebar-item-text sidebar-link">Functional habitat</a>
   </div>
 </li>
       </ul>
@@ -226,52 +260,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>Here I will present an annotated index of the different notebooks through a short summary.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note that there are five types of callouts, including: <code>note</code>, <code>warning</code>, <code>important</code>, <code>tip</code>, and <code>caution</code>.</p>
-</div>
-</div>
-<div class="callout-tip callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Tip With Caption
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This is an example of a callout with a caption.</p>
-</div>
-</div>
-<div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Expand To Learn About Collapse
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>This is an example of a ‘folded’ caution callout that can be expanded by the user. You can use <code>collapse="true"</code> to collapse it by default or <code>collapse="false"</code> to make a collapsible callout that is expanded by default.</p>
-</div>
-</div>
-</div>
+<p>The first Notebook on how <a href="../notebooks/nbk_getting_started.html">getting started</a> with ConScape is a prerequisite for all subsequent Notebooks.</p>
+<p>From here we recommend you look at the Notebook on <a href="../notebooks/nbk_landmarks.html">performance</a> as this introduces the concept of ‘landmarks’, which are used throughout the other Notebooks to improve performance.</p>
+<p>The next Notebook on different <a href="../notebooks/nbk_distance_metrics.html">ecological distance</a> metrics builds upon the ideas presented in <span class="citation" data-cites="vanmoorter2021defining">(<a href="#ref-vanmoorter2021defining" role="doc-biblioref">Moorter et al. 2021</a>)</span>.</p>
+<p>The next Notebook details different ways to measure <a href="../notebooks/nbk_functionality_variants.html">functional habitat</a>.</p>
+<p>Finally, the Notebook on <a href="../notebooks/nbk_cost.html">dispersal mortality</a> uses the ConScape library for applications similar to those presented in <span class="citation" data-cites="fletcher2019towards">(<a href="#ref-fletcher2019towards" role="doc-biblioref">Fletcher Jr et al. 2019</a>)</span> and <span class="citation" data-cites="vanmoorter2021defining">(<a href="#ref-vanmoorter2021defining" role="doc-biblioref">Moorter et al. 2021</a>)</span>, where the probability and cost of movement are potentially independent processes.</p>
+<p><a href="../notebooks/nbk_iterative_method.html">numerical issues</a></p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-fletcher2019towards" class="csl-entry" role="doc-biblioentry">
+Fletcher Jr, Robert J, Jorge A Sefair, Chao Wang, Caroline L Poli, Thomas AH Smith, Emilio M Bruna, Robert D Holt, Michael Barfield, Andrew J Marx, and Miguel A Acevedo. 2019. <span>“Towards a Unified Framework for Connectivity That Disentangles Movement and Mortality in Space and Time.”</span> <em>Ecology Letters</em> 22 (10): 1680–89.
+</div>
+<div id="ref-vanmoorter2021defining" class="csl-entry" role="doc-biblioentry">
+Moorter, Bram van, Ilkka Kivimäki, Manuela Panzacchi, and Marco Saerens. 2021. <span>“Defining and Quantifying Effective Connectivity of Landscapes for Species’ Movements.”</span> <em>Ecography</em> 44 (6): 870–84.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
