@@ -1,0 +1,40 @@
+---
+title: "Test"
+---
+
+[Getting Started](/notebooks/nbk_getting_started.qmd)
+[dispersal mortality](/notebooks/nbk_cost.qmd)
+[ecological distance](/notebooks/nbk_distance_metrics.qmd)
+[performance](/notebooks/nbk_landmarks.qmd)
+[Functional habitat](/notebooks/nbk_functionality_variants.qmd)
+[numerical issues](/notebooks/nbk_iterative_method.qmd)
+
+```{julia}
+#| label: fig-functionality_landmark_comparison
+#| fig-cap: Comparison of functional habitat with and without landmarks.
+#| fig-subcap: 
+#|   - "Complete"
+#|   - "Landmark based"
+#| layout-ncol: 2
+
+#display(
+```
+
+
+::: {.callout-note}
+Note that there are five types of callouts, including:
+`note`, `warning`, `important`, `tip`, and `caution`.
+:::
+
+::: {.callout-tip}
+## Tip With Caption
+
+This is an example of a callout with a caption.
+:::
+
+::: {.callout-caution collapse="true"}
+## Expand To Learn About Collapse
+
+This is an example of a 'folded' caution callout that can be expanded by the user. You can use `collapse="true"` to collapse it by default or `collapse="false"` to make a collapsible callout that is expanded by default.
+:::
+

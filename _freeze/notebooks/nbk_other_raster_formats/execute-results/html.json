@@ -1,0 +1,11 @@
+{
+  "hash": "502507d466bd41f10ee5d11e8953c22d",
+  "result": {
+    "markdown": "---\ntitle: \"Other raster formats\"\nbibliography: biblio.bib\n---\n\n::: {.callout-tip}\n## Here you will learn\n\nHow to use other raster file formats in ConScape.\n:::\n\n::: {.callout-warning}\nThis notebook assumes familiarity with the basics as covered in the notebook [Getting Started](/notebooks/nbk_getting_started.qmd)\n:::\n\n::: {.cell execution_count=1}\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n\"C:/Users/bram.van.moorter/Documents/ConScape_website/site/notebooks/data/\"\n```\n:::\n:::\n\n\n::: {.cell execution_count=2}\n``` {.julia .cell-code}\n# load Rasters library\nusing Rasters\n# read habitat quality using Rasters()\nhab_qual = Raster(joinpath(datadir, \"hab_qual_1000_tif.tif\"))\n```\n:::\n\n\nSuch a raster can easily be converted to a matrix for use in ConScape:\n\n::: {.cell execution_count=3}\n``` {.julia .cell-code}\n# Replace missing values by NaN and transform into a matrix\nhab_qual = replace_missing(hab_qual, NaN)\nhab_qual = Matrix(transpose(Array(hab_qual)[:,:,1]))\n```\n:::\n\n\n",
+    "supporting": [
+      "nbk_other_raster_formats_files\\figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

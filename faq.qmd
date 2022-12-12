@@ -23,5 +23,16 @@ A difficult question... First, testing different values of $\theta$ will allow y
 
 # I am getting empty plots
 
+```{julia}
+#| eval: false
+
+non_matches = findall(xor.(isnan.(mov_prob), isnan.(hab_qual)))
+mov_prob[non_matches] .= NaN
+hab_qual[non_matches] .= NaN;
+```
+
+# Can I use a patch-matrix landscape representation in ConScape
+
+Yes, but we still have to make a notebook to demonstrate this application.
 
 

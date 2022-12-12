@@ -1,0 +1,38 @@
+---
+title: "Other raster formats"
+bibliography: biblio.bib
+---
+
+::: {.callout-tip}
+## Here you will learn
+
+How to use other raster file formats in ConScape.
+:::
+
+::: {.callout-warning}
+This notebook assumes familiarity with the basics as covered in the notebook [Getting Started](/notebooks/nbk_getting_started.qmd)
+:::
+
+```{julia}
+#| echo: false
+#| eval: true
+
+datadir = "C:/Users/bram.van.moorter/Documents/ConScape_website/site/notebooks/data/"
+```
+
+```{julia}
+#| eval: false
+# load Rasters library
+using Rasters
+# read habitat quality using Rasters()
+hab_qual = Raster(joinpath(datadir, "hab_qual_1000_tif.tif"))
+```
+
+Such a raster can easily be converted to a matrix for use in ConScape:
+
+```{julia}
+#| eval: false
+# Replace missing values by NaN and transform into a matrix
+hab_qual = replace_missing(hab_qual, NaN)
+hab_qual = Matrix(transpose(Array(hab_qual)[:,:,1]))
+```

@@ -1,0 +1,11 @@
+{
+  "hash": "b9efb13caac50240e14afc1f58da4f96",
+  "result": {
+    "markdown": "---\ntitle: \"Test\"\n---\n\n[Getting Started](/notebooks/nbk_getting_started.qmd)\n[dispersal mortality](/notebooks/nbk_cost.qmd)\n[ecological distance](/notebooks/nbk_distance_metrics.qmd)\n[performance](/notebooks/nbk_landmarks.qmd)\n[Functional habitat](/notebooks/nbk_functionality_variants.qmd)\n[numerical issues](/notebooks/nbk_iterative_method.qmd)\n\n::: {#fig-functionality_landmark_comparison .cell layout-ncol='2' execution_count=1}\n``` {.julia .cell-code}\n#display(\n```\n\nComparison of functional habitat with and without landmarks.\n:::\n\n\n::: {.callout-note}\nNote that there are five types of callouts, including:\n`note`, `warning`, `important`, `tip`, and `caution`.\n:::\n\n::: {.callout-tip}\n## Tip With Caption\n\nThis is an example of a callout with a caption.\n:::\n\n::: {.callout-caution collapse=\"true\"}\n## Expand To Learn About Collapse\n\nThis is an example of a 'folded' caution callout that can be expanded by the user. You can use `collapse=\"true\"` to collapse it by default or `collapse=\"false\"` to make a collapsible callout that is expanded by default.\n:::\n\n",
+    "supporting": [
+      "nbk_test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
