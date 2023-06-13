@@ -2,7 +2,7 @@
 title: "Which value to choose for theta?"
 author: "Bram van Moorter"
 date: "2022-12-05"
-categories: [settings]
+categories: [settings, topic guide]
 ---
 
 In other words: "which level of randomness for the paths between source and target?"
