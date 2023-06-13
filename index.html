@@ -223,6 +223,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
   <li><a href="#conscapes-origin-story" id="toc-conscapes-origin-story" class="nav-link" data-scroll-target="#conscapes-origin-story">ConScape’s origin story</a></li>
+  <li><a href="#how-the-documentation-is-organized" id="toc-how-the-documentation-is-organized" class="nav-link" data-scroll-target="#how-the-documentation-is-organized">How the documentation is organized</a></li>
   </ul>
 </nav>
     </div>
@@ -277,17 +278,19 @@ ConScape citation
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">APA style</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">bibtex</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Van Moorter, B., Kivimäki, I., Noack, A., Devooght, R., Panzacchi, M., Hall, K. R., Leleux, P. &amp; Saerens, M. (2022). Accelerating advances in landscape connectivity modelling with the ConScape library. <em>Methods in Ecology and Evolution</em>, 00, 1–13.</p>
+<p>Van Moorter, B., Kivimäki, I., Noack, A., Devooght, R., Panzacchi, M., Hall, K. R., Leleux, P. &amp; Saerens, M. (2023). Accelerating advances in landscape connectivity modelling with the ConScape library. <em>Methods in Ecology and Evolution</em>, 14(1), 133–145.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<pre><code>@article{van2022accelerating,
-  title={Accelerating advances in landscape connectivity modelling with the ConScape library},
-  author={Van Moorter, Bram and Kivim{\"a}ki, Ilkka and Noack, Andreas and Devooght, Robin and Panzacchi, Manuela and Hall, Kimberly R and Leleux, Pierre and Saerens, Marco},
-  journal={Methods in Ecology and Evolution},
-  year={2022},
-  volume = {00},
-  pages = {1-13},
-  publisher={Wiley Online Library}
+<pre><code>@article{vanmoorter2023accelerating,
+  author = {Van Moorter, Bram and Kivimäki, Ilkka and Noack, Andreas and Devooght, Robin and Panzacchi, Manuela and Hall, Kimberly R. and Leleux, Pierre and Saerens, Marco},title = {Accelerating advances in landscape connectivity modelling with the ConScape library},
+  journal = {Methods in Ecology and Evolution},
+  volume = {14},
+  number = {1},
+  pages = {133-145},
+  doi = {https://doi.org/10.1111/2041-210X.13850},
+  url = {https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.13850},
+  eprint = {https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.13850},
+  year = {2023}
 }</code></pre>
 </div>
 </div>
@@ -297,8 +300,18 @@ ConScape citation
 </section>
 <section id="conscapes-origin-story" class="level1">
 <h1>ConScape’s origin story</h1>
-<p>ConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in <a href="https://circuitscape.org/">Circuitscape</a>). The name ConScape itself refers not only to ‘Connected Landscapes’, but also to <strong>Con</strong>efor + Circuit<strong>scape</strong> as a testimony to this legacy.</p>
+<p>ConScape was developed to integrate habitat suitability with habitat permeability, as measured by respectively resource and step selection functions, for wild reindeer in Norway. To this end we rediscovered the Conefor approach, which we extended with the randomized shortest paths (RSP) framework instead of the least-cost path one. This RSP framework is itself an extension of the pure random walk, as in <a href="https://circuitscape.org/">Circuitscape</a>. The name ConScape itself refers not only to ‘Connected Landscapes’, but also to <strong>Con</strong>efor + Circuit<strong>scape</strong> as a testimony to this legacy.</p>
 <p>ConScape has a similar focus as Conefor in that it aims at assessing the landscape network as a whole, i.e.&nbsp;it connects all landscape units (e.g.&nbsp;pixels) to each other (in other words, all-to-all connectivity). However, ConScape uses the RSP framework in addition to the LCP to compute the connectivity. Circuitscape, on the other hand, is a pioneering connectivity tool to move beyond an exclusive focus on the least-cost path connecting two points to considering all paths following a random walk process (based on the movement of electricity on an electrical network). However, Circuitscape’s main use case is not focussed on an all-to-all connectivity assessment, but instead aims at identifying corridors between a limited number of areas.</p>
+</section>
+<section id="how-the-documentation-is-organized" class="level1">
+<h1>How the documentation is organized</h1>
+<p>We are developing the documentation for ConScape following the <a href="https://documentation.divio.com/">four types of documentation system</a>, note that this is very much under development and not all types are equally present. However, an overview of these four types may be helpful for you to know where to look for certain things:</p>
+<ul>
+<li><p><a href="./notebooks/index.html">Tutorials</a> take you by the hand through a series of steps to run your first analysis using ConScape. Start here if you’re new to ConScape or connectivity analysis, for instance with the <a href="./notebooks/nbk_getting_started.html">getting started notebook</a>. Also look at the <a href="./quick_start.html">Quick Start</a>.</p></li>
+<li><p>‘How-to guides’ are recipes. They guide you through the steps involved in addressing key problems and use-cases. They are more advanced than tutorials and assume some knowledge of how ConScape works. These can be found under specific <a href="./faqV2.html">Frequently Asked Questions</a>.</p></li>
+<li><p>‘Topic guides’ discuss key topics and concepts in ConScape and connectivity modeling in general at a fairly high level and provide useful background information and explanation. These can be found under <a href="./background.html">Background</a> or specific <a href="./faqV2.html">Frequently Asked Questions</a></p></li>
+<li><p>‘Reference guides’ contain technical reference for APIs and other aspects of ConScape’s machinery. They describe how it works and how to use it but assume that you have a basic understanding of key concepts.</p></li>
+</ul>
 
 
 </section>
